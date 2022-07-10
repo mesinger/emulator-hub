@@ -1,0 +1,13 @@
+*.layout
+*.cbp
+*.depend
+*.kdev4
+.kdev*
+build/
+SimpleNES
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+Makefile
+cmake-build-debug/
+simplenes.log
