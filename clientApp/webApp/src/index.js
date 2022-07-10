@@ -7,9 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { CppPulsatingEmulatorContext } from "./cppPulsatingEmulatorContext.js";
-const width = 64;
-const height = 64;
+import { SimpleNesEmulatorContext } from "./simpleNesEmulatorContext.js";
+const width = 256;
+const height = 240;
 const pixelWidth = 2;
 const pixelSpacing = 0;
 let emulatorContext;
@@ -20,7 +20,13 @@ canvas.height = 1000;
 const ctx = canvas.getContext("2d");
 export default function loadEmulator() {
     return __awaiter(this, void 0, void 0, function* () {
-        emulatorContext = yield CppPulsatingEmulatorContext.create({
+        // const rom = await (await fetch("firedemo.nes")).arrayBuffer();
+        // const memory = new WebAssembly.Memory({initial: 20, maximum: 100, shared: true});
+        // const romInMemory = new Uint8Array(memory.buffer, 5000, 5);
+        // romInMemory.set([1, 2, 3, 4, 5]);
+        // console.log(romInMemory.byteOffset);
+        // console.log(romInMemory.byteLength);
+        emulatorContext = yield SimpleNesEmulatorContext.create({
             width: width,
             height: height,
         });
@@ -29,6 +35,7 @@ export default function loadEmulator() {
     });
 }
 function renderLoop() {
+    // console.log(pixels);
     emulatorContext.tick();
     draw();
     requestAnimationFrame(renderLoop);
@@ -36,7 +43,7 @@ function renderLoop() {
 const draw = () => {
     for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
-            const i = x + width * y;
+            const i = (x + width * y) * 3;
             ctx.fillStyle = `rgb(
                 ${pixels[i]},
                 ${pixels[i + 1]},

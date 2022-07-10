@@ -1,3 +1,4 @@
+#pragma once
 #include "Mapper.h"
 
 namespace sn

@@ -1,6 +1,6 @@
 #ifndef EMULATOR_H
 #define EMULATOR_H
-#include <SFML/Graphics.hpp>
+//#include <SFML/Graphics.hpp>
 #include <chrono>
 
 #include "CPU.h"
@@ -19,12 +19,14 @@ namespace sn
     class Emulator
     {
     public:
-        Emulator();
-        void run(std::string rom_path);
+        Emulator(HeadlessScreen* screen);
+//        void run(std::string rom_path);
+        std::string run();
+        void tick();
         void setVideoWidth(int width);
         void setVideoHeight(int height);
         void setVideoScale(float scale);
-        void setKeys(std::vector<sf::Keyboard::Key>& p1, std::vector<sf::Keyboard::Key>& p2);
+//        void setKeys(std::vector<sf::Keyboard::Key>& p1, std::vector<sf::Keyboard::Key>& p2);
     private:
         void DMA(Byte page);
 
@@ -37,8 +39,9 @@ namespace sn
 
         Controller m_controller1, m_controller2;
 
-        sf::RenderWindow m_window;
-        VirtualScreen m_emulatorScreen;
+//        sf::RenderWindow m_window;
+//        VirtualScreen m_emulatorScreen;
+        HeadlessScreen* pScreen;
         float m_screenScale;
 
         TimePoint m_cycleTimer;

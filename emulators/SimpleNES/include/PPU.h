@@ -4,8 +4,12 @@
 #include <array>
 #include "PictureBus.h"
 #include "MainBus.h"
-#include "VirtualScreen.h"
+#include "HeadlessScreen.h"
 #include "PaletteColors.h"
+
+struct Color {
+    uint8_t r, g, b;
+};
 
 namespace sn
 {
@@ -20,7 +24,7 @@ namespace sn
     class PPU
     {
         public:
-            PPU(PictureBus &bus, VirtualScreen &screen);
+            PPU(PictureBus &bus, HeadlessScreen *screen);
             void step();
             void reset();
 
@@ -46,7 +50,7 @@ namespace sn
             void writeOAM(Byte addr, Byte value);
             Byte read(Address addr);
             PictureBus &m_bus;
-            VirtualScreen &m_screen;
+            HeadlessScreen *m_screen;
 
             std::function<void(void)> m_vblankCallback;
 
@@ -96,7 +100,7 @@ namespace sn
 
             Address m_dataAddrIncrement;
 
-            std::vector<std::vector<sf::Color>> m_pictureBuffer;
+            std::vector<std::vector<Color>> m_pictureBuffer;
     };
 }
 

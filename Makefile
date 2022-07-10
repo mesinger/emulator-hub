@@ -29,3 +29,19 @@ cpp-pulsating-build: cpp-pulsating-clean
 
 cpp-pulsating: web-pre-deploy cpp-pulsating-build
 	cp -R emulators/cpp-pulsating/build clientApp/webApp/src/emulators/cpp-pulsating
+
+# simple-nes
+simple-nes-clean:
+	rm -rf clientApp/webApp/src/emulators/simple-nes && rm -rf emulators/SimpleNES/build
+
+simple-nes-build: simple-nes-clean
+	mkdir emulators/SimpleNES/build && \
+	docker run --rm -v $(shell pwd):/src -u $(id -u):$(id -g) \
+	emscripten/emsdk emcc emulators/SimpleNES/context.cpp \
+	-Iemulators/SimpleNES/include/ -Iemulators/SimpleNES/src/ \
+	-o emulators/SimpleNES/build/emulator.js \
+	--preload-file emulators/SimpleNES/roms \
+	--no-entry --bind -sEXPORT_ES6=1 -sMODULARIZE=1
+
+simple-nes: web-pre-deploy simple-nes-build
+	cp -R emulators/SimpleNES/build clientApp/webApp/src/emulators/simple-nes

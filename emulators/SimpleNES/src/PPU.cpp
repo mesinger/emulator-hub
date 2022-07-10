@@ -3,11 +3,11 @@
 
 namespace sn
 {
-    PPU::PPU(PictureBus& bus, VirtualScreen& screen) :
+    PPU::PPU(PictureBus& bus, HeadlessScreen *screen) :
         m_bus(bus),
         m_screen(screen),
         m_spriteMemory(64 * 4),
-        m_pictureBuffer(ScanlineVisibleDots, std::vector<sf::Color>(VisibleScanlines, sf::Color::Magenta))
+        m_pictureBuffer(ScanlineVisibleDots, std::vector<Color>(VisibleScanlines, Color {}))
     {}
 
     void PPU::reset()
@@ -178,7 +178,10 @@ namespace sn
                     //else bgColor
 
 //                     m_screen.setPixel(x, y, sf::Color(colors[m_bus.readPalette(paletteAddr)]));
-                    m_pictureBuffer[x][y] = sf::Color(colors[m_bus.readPalette(paletteAddr)]);
+                    uint32_t rgbaColor = colors[m_bus.readPalette(paletteAddr)];
+                    m_pictureBuffer[x][y].r = rgbaColor >> 24;
+                    m_pictureBuffer[x][y].g = (rgbaColor >> 16) & 0xff;
+                    m_pictureBuffer[x][y].b = (rgbaColor >> 8) & 0xff;
                 }
                 else if (m_cycle == ScanlineVisibleDots + 1 && m_showBackground)
                 {
@@ -258,7 +261,8 @@ namespace sn
                     {
                         for (int y = 0; y < m_pictureBuffer[0].size(); ++y)
                         {
-                            m_screen.setPixel(x, y, m_pictureBuffer[x][y]);
+                            auto& color = m_pictureBuffer[x][y];
+                            m_screen->setPixel(x, y, color.r, color.g, color.b);
                         }
                     }
 

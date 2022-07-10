@@ -1,18 +1,19 @@
 import {Context, ContextOptions, CppWasmModule} from "./context.js";
 // @ts-ignore
-import Module from "./emulators/cpp-pulsating/emulator.js";
+import Module from "./emulators/simple-nes/emulator.js";
 
-export class CppPulsatingEmulatorContext implements Context {
+export class SimpleNesEmulatorContext implements Context {
   constructor(private wasm: CppWasmModule) {
   }
 
   static async create(options: ContextOptions): Promise<Context> {
     const wasm = await Module();
 
-    const emulator = new wasm.PulsatingEmulator(options.width, options.height);
+    const emulator = new wasm.SimpleNesWasmContext(options.width, options.height);
+    console.log(emulator.run());
 
     // @ts-ignore
-    return new CppPulsatingEmulatorContext({
+    return new SimpleNesEmulatorContext({
       emulator: emulator
     });
   }
