@@ -1,4 +1,4 @@
-import init, {Context as EmulatorContext, wasmMemory} from "../emulator/emulator_hub.js";
+import init, {Context as EmulatorContext, wasmMemory} from "./emulators/rust-pulsating/emulator.js";
 import {Context, ContextOptions} from "./context.js";
 
 export class RustPulsatingEmulatorContext implements Context {

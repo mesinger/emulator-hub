@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import init, { Context as EmulatorContext, wasmMemory } from "../emulator/emulator_hub.js";
+import init, { Context as EmulatorContext, wasmMemory } from "./emulators/rust-pulsating/emulator.js";
 export class RustPulsatingEmulatorContext {
     constructor(context, options) {
         this.context = context;

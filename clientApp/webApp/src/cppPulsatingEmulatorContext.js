@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 // @ts-ignore
-import Module from "../c-emulator/shibe.js";
+import Module from "./emulators/cpp-pulsating/emulator.js";
 export class CppPulsatingEmulatorContext {
     constructor(wasm) {
         this.wasm = wasm;

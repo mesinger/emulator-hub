@@ -1,6 +1,6 @@
 import {Context, ContextOptions} from "./context.js";
 // @ts-ignore
-import Module from "../c-emulator/shibe.js";
+import Module from "./emulators/cpp-pulsating/emulator.js";
 
 interface CppWasmModule {
   emulator: {

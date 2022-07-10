@@ -15,8 +15,17 @@ public:
     }
 
     void tick() {
+        int sign = increaseColor ? 1 : -1;
         for(int i = 0; i < screenSize; i++) {
-            pScreen[i] = (pScreen[i] - 1) % 255;
+            pScreen[i] = (pScreen[i] + (1 * sign));
+        }
+
+        if(pScreen[0] >= 255) {
+            increaseColor = false;
+        }
+
+        if(pScreen[0] <= 0) {
+            increaseColor = true;
         }
     }
 
@@ -27,7 +36,7 @@ public:
 private:
     const int width, height, screenSize;
     uint8_t * pScreen;
-
+    bool increaseColor = true;
 };
 
 EMSCRIPTEN_BINDINGS(my_class_example) {

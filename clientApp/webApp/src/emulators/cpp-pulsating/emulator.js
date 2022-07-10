@@ -1540,13 +1540,13 @@ function createExportWrapper(name, fixedasm) {
 
 var wasmBinaryFile;
 if (Module['locateFile']) {
-  wasmBinaryFile = 'shibe.wasm';
+  wasmBinaryFile = 'emulator.wasm';
   if (!isDataURI(wasmBinaryFile)) {
     wasmBinaryFile = locateFile(wasmBinaryFile);
   }
 } else {
   // Use bundler-friendly `new URL(..., import.meta.url)` pattern; works in browsers too.
-  wasmBinaryFile = new URL('shibe.wasm', import.meta.url).toString();
+  wasmBinaryFile = new URL('emulator.wasm', import.meta.url).toString();
 }
 
 function getBinary(file) {
@@ -3684,7 +3684,7 @@ unexportedRuntimeFunction('setTempRet0', false);
 unexportedRuntimeFunction('callMain', false);
 unexportedRuntimeFunction('abort', false);
 unexportedRuntimeFunction('keepRuntimeAlive', false);
-Module["wasmMemory"] = wasmMemory;
+unexportedRuntimeFunction('wasmMemory', false);
 unexportedRuntimeFunction('warnOnce', false);
 unexportedRuntimeFunction('stackSave', false);
 unexportedRuntimeFunction('stackRestore', false);
