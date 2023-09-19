@@ -3,9 +3,8 @@ web-pre-deploy:
 	mkdir -p clientApp/webApp/src/emulators
 
 serve:
-	serve clientApp/webApp
+	npx serve clientApp/webApp
 
-# emulators
 # rust-pulsating
 rust-pulsating-clean:
 	rm -rf clientApp/webApp/src/emulators/rust-pulsating && rm -rf emulators/rust-pulsating/build

@@ -2,3 +2,5 @@
 build/
 .vscode/
 .DS_Store
+clientApp/webApp/src/emulators/
+node_modules/
