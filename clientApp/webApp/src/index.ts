@@ -16,7 +16,7 @@ canvas.width = 1000
 canvas.height = 1000;
 const ctx = canvas.getContext("2d");
 
-export default async function loadEmulator() {
+async function loadEmulator() {
   // const rom = await (await fetch("firedemo.nes")).arrayBuffer();
 
   // const memory = new WebAssembly.Memory({initial: 20, maximum: 100, shared: true});
@@ -63,3 +63,5 @@ const draw = () => {
     }
   }
 }
+
+loadEmulator().then(_ => console.log("Loaded emulator"));

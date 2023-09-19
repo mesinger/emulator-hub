@@ -3,7 +3,15 @@ web-pre-deploy:
 	mkdir -p clientApp/webApp/src/emulators
 
 serve:
-	npx serve clientApp/webApp
+	npx serve dist
+
+# deploy: rust-pulsating cpp-pulsating simple-nes
+deploy:
+	rm -rf ./dist
+	tsc -p clientApp/webApp/tsconfig.json
+	cp clientApp/webApp/index.html ./dist
+	cp clientApp/webApp/src/emulators/simple-nes/emulator.wasm ./dist/emulators/simple-nes/
+	cp clientApp/webApp/src/emulators/simple-nes/emulator.data ./dist
 
 # rust-pulsating
 rust-pulsating-clean:

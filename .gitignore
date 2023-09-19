@@ -4,3 +4,4 @@ build/
 .DS_Store
 clientApp/webApp/src/emulators/
 node_modules/
+dist/
